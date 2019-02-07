@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { LoginComponent } from './login/LoginComponent';
+
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    HeaderInnerComponent,
-    HeaderOuterComponent,
-    HeaderBodyComponent,
-    HeaderLoginComponent,
-    FooterCommonComponent
+    LoginComponent,
+    RegisterComponent
   ],
   exports: [
-    HeaderInnerComponent,
-    HeaderOuterComponent,
-    HeaderBodyComponent,
-    HeaderLoginComponent,
-    FooterCommonComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     IonicModule

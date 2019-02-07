@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../../Components/login/login.component';
 
 @Component({
   selector: 'app-authentication',
