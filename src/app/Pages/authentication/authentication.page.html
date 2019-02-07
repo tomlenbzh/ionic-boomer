@@ -1,5 +1,19 @@
 <ion-content padding>
 
-  <app-login></app-login>
+  <!-- Render Login Component -->
+  <div *ngIf="showComponent">
+    <app-login></app-login>
+    <div class="auth-switch-button-div">
+      <button class="auth-switch-button" (click)="switchComponent()">Not a member yet ?</button>
+    </div>
+  </div>
+
+  <!-- Render Register Component -->
+  <div *ngIf="!showComponent">
+    <app-register></app-register>
+    <div class="auth-switch-button-div">
+      <button class="auth-switch-button" (click)="switchComponent()">Already got an account ?</button>
+    </div>
+  </div>
 
 </ion-content>

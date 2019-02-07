@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthenticationPage implements OnInit {
 
+  showComponent = true;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  switchComponent() {
+    this.showComponent = !this.showComponent;
   }
 
 }

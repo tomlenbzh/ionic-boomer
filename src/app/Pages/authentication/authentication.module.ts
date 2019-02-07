@@ -9,8 +9,6 @@ import { IonicModule } from '@ionic/angular';
 import { AuthenticationPage } from './authentication.page';
 // import { LoginComponent } from '../../Components/login/login.component';
 
-
-
 const routes: Routes = [
   {
     path: '',

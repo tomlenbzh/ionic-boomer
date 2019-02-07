@@ -1,3 +1,14 @@
-<p>
-  register works!
-</p>
+<div class="auth-container">
+  <!-- Form Content -->
+  <h1 class="auth-title">Register</h1>
+  <input class="auth-input" type="text" placeholder="Enter your login..." [(ngModel)]="login">
+  <input class="auth-input" type="password" placeholder="Enter your password..." [(ngModel)]="password">
+  <input class="auth-input" type="password" placeholder="Confirmation..." [(ngModel)]="password_confirm">
+  <button class="auth-button" (click)="signUp()">Create my account</button>
+
+  <!-- Sign Up Error -->
+  <div *ngIf="sign_up_error !== ''" class="auth-error">
+    <h4>Error !</h4>
+    <p>{{sign_up_error}}</p>
+  </div>
+</div>
