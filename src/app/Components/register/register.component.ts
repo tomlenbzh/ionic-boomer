@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   password_confirm: string;
   sign_up_error: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.login = '';
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
         console.log('Login: ' + this.login);
         console.log('Password: ' + this.password);
         console.log('Redirect to: Home');
+        this.router.navigateByUrl('home');
       } else {
         this.sign_up_error = 'You must enter the same password !';
         console.log(this.sign_up_error);

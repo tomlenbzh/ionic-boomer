@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,7 @@ export class LoginComponent implements OnInit {
   login: string;
   password: string;
   sign_in_error: string;
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.login = '';
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       console.log('Login: ' + this.login);
       console.log('Password: ' + this.password);
       console.log('Redirect to: Home');
+      this.router.navigateByUrl('home');
     } else {
       this.sign_in_error = 'Please fill all the fields to sign in to your account !';
       console.log(this.sign_in_error);
