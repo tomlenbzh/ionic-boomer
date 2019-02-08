@@ -1,0 +1,54 @@
+.room-card {
+  width: 100%;
+  background-color: #16202c;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid #ed9019;
+}
+
+.img-room {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.room-difficulty {
+  background-color: #0e2f50;
+  padding: 5px 15px 5px 15px;
+  position: absolute;
+  top: 25px;
+  right: 1px;
+  font-size: 25px;
+  color: white;
+  border-top: 1px solid #ed9019;
+  border-left: 1px solid #ed9019;
+  border-bottom: 1px solid #ed9019;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.room-description {
+  background-color: #16202c;
+  color: white;
+  padding: 10px 15px 15px 15px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.room-footer {
+  padding: 0px 15px 15px 15px;
+  text-align: right;
+}
+
+.auth-button {
+  padding: 0px 15px 0px 15px;
+  height: 2em;
+  border: 1px solid #ed9019;
+  border-radius: 1.5em;
+  background-color: #0e2f50;
+  font-size: medium;
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+}

@@ -1,17 +1,28 @@
 .header {
-    background-color: #16202c;
-    color: white;
-    text-align: center;
-    padding-bottom: 5px;
-    vertical-align: middle;
-    font-size: 1.5em;
-    padding-top: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 1.5em;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid #ed9019;
+  background-color: #16202c;
 }
 
-.subheader {
-    background-color: #0e2f50;
-    color: #ed9019;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 1.5em;
+.sub-header {
+  font-size: 1.5em;
+  vertical-align: middle;
+  text-align: center;
+  color: #ed9019;
+  border-bottom: 1px solid #ed9019;
+  background-color: #0e2f50;
+}
+
+.sub-header-columns {
+  text-align: center;
+}
+
+.sub-header-scores {
+  font-size: small;
+  color: white;
 }

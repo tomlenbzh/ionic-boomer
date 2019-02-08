@@ -1,29 +1,34 @@
+<!-- Main Header - Navigation -->
 <div class="header">
   <ion-grid>
     <ion-row>
-      <ion-col col-2>
+      <ion-col col-2 routerLink="/home">
         <ion-icon name="home"></ion-icon>
       </ion-col>
       <ion-col col-8>
         <span>Boomer</span>
       </ion-col>
-      <ion-col col-2>
+      <ion-col col-2 routerLink="/profile">
         <ion-icon name="contact"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
 </div>
 
-<div class="subheader">
+<!-- Sub-Header - Scores -->
+<div class="sub-header">
   <ion-grid>
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-4 class="sub-header-columns">
+        <span class="sub-header-scores">200</span>
         <ion-icon name="star"></ion-icon>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-4 class="sub-header-columns">
+        <span class="sub-header-scores">200</span>
         <ion-icon name="heart-dislike"></ion-icon>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-4 class="sub-header-columns" routerLink="/scores">
+        <span class="sub-header-scores">200</span>
         <ion-icon name="trophy"></ion-icon>
       </ion-col>
     </ion-row>
