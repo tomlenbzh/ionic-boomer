@@ -12,8 +12,12 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  login(data) {
-    return this.http.post(ApiUrl + 'auths/login', data);
+  login(credentials) {
+    return this.http.post(ApiUrl + 'auths/login', credentials);
+  }
+
+  register(credentials) {
+    return this.http.post(ApiUrl + 'auths/signup', credentials);
   }
 
   getProfile(pseudo) {

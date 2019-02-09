@@ -1,0 +1,60 @@
+.profile-content {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #ed9019;
+  border-radius: 5px;
+  background-color: #16202c;
+}
+
+.profile-header {
+  position: relative;
+}
+
+.profile-image {
+  width: 20vh;
+  height: 20vh;
+  border: 1px solid #ed9019;
+  border-radius: 50%;
+}
+
+.profile-pseudo {
+  position: relative;
+  color: white;
+}
+
+.profile-info {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 50%;
+}
+
+.profile-info-position {
+  position: relative;
+  text-align: center;
+}
+
+.profile-camera-button {
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #ed9019;
+  border-radius: 50%;
+  color: white;
+  background-color: #0e2f50;
+}
+
+.sign-out-button {
+  height: 2em;
+  padding: 0px 15px 0px 15px;
+  border: 1px solid #ed9019;
+  border-radius: 1.5em;
+  font-size: medium;
+  color: white;
+  background-color: #872626;
+}
+
+.profile-options {
+  color: white;
+}

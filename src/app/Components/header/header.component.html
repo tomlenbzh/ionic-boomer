@@ -20,11 +20,11 @@
   <ion-grid>
     <ion-row>
       <ion-col col-4 class="sub-header-columns">
-        <span class="sub-header-scores" *ngIf="user">{{user.score}}</span>
+        <span class="sub-header-data" *ngIf="user">{{user.score}}</span>
         <ion-icon name="star"></ion-icon>
       </ion-col>
       <ion-col col-4 class="sub-header-columns">
-        <span class="sub-header-scores" *ngIf="user">{{user.defeat}}</span>
+        <span class="sub-header-data" *ngIf="user">{{user.defeat}}</span>
         <ion-icon name="heart-dislike"></ion-icon>
       </ion-col>
       <ion-col col-4 class="sub-header-columns" routerLink="/scores">
