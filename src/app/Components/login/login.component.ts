@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.token);
             localStorage.setItem('user', JSON.stringify(res._user));
             this.router.navigateByUrl('home');
+            this.login = '';
+            this.password = '';
+            this.sign_in_error = '';
           },
           error => {
             this.sign_in_error = error.error.message;

@@ -1,5 +1,7 @@
 {
   "name": "ionic-boomer-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
