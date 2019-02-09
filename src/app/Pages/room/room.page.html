@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>room</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content padding>
 
+  <img [src]="currentRoom.image" alt="Room image" class="room-image" (click)="getCoordinates($event)">
+
+  <div id="bombImage">
+    <img *ngIf="bombX !== unedfined && bombY !== unedfined" src="../../../assets/Bomb.png" alt="Bomb image" width="50px"
+      style="position: absolute">
+  </div>
+
 </ion-content>
+
+<app-footer></app-footer>

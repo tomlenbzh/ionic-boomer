@@ -7,17 +7,23 @@ import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from '../Components/header/header.component';
+import { RoomCardComponent } from '../Components/room-card/room-card.component';
+import { FooterComponent } from '../Components/footer/footer.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoomCardComponent,
+    FooterComponent
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    RoomCardComponent,
+    FooterComponent
   ],
   imports: [
     IonicModule,

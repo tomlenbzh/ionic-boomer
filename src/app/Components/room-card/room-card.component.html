@@ -1,0 +1,12 @@
+<div class="room-card">
+  <img class="room-image" [src]="room.image">
+  <div class="room-difficulty">
+    {{room.difficulty}}
+  </div>
+  <div class="room-description">
+    {{room.description}}
+  </div>
+  <div class="room-footer">
+    <button class="room-join-button" (click)="navigateToRoom()" routerLink="/room">Join the room...</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.room-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  border-top: 1px solid #ed9019;
+  font-size: 1.5em;
+  color: #ed9019;
+  background-color: #0e2f50;
+}
+
+.room-footer-columns {
+  text-align: center;
+}
+
+.room-footer-data {
+  font-size: small;
+  color: white;
+}
