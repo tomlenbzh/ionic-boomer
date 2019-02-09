@@ -1,36 +1,45 @@
+import { Events } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from '../../Service/room.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.page.html',
   styleUrls: ['./room.page.scss'],
 })
-export class RoomPage implements OnInit {
+export class RoomPage {
 
   currentRoom: any;
-  bombX: undefined;
-  bombY: undefined;
+  bombX: number;
+  bombY: number;
 
-  constructor(private roomService: RoomService) { }
+  constructor(private router: Router, private events: Events) { }
 
-  ngOnInit() {
-    this.currentRoom = this.roomService.current_room;
+  ionViewWillEnter() {
+    if (JSON.parse(localStorage.getItem('room'))) {
+      this.currentRoom = JSON.parse(localStorage.getItem('room'));
+    } else {
+      this.router.navigateByUrl('home');
+    }
+  }
+
+  ionViewDidLeave() {
+    this.bombX = undefined;
+    this.bombY = undefined;
   }
 
   getCoordinates(event) {
     // This output's the X coord of the click
-    console.log(event.clientX);
     this.bombX = event.clientX;
-
     // This output's the Y coord of the click
-    console.log(event.clientY);
     this.bombY = event.clientY;
 
     const bomb = document.getElementById('bombImage');
     bomb.style.position = 'absolute';
-    bomb.style.left = this.bombX + 'px';
-    bomb.style.top = this.bombY + 'px';
+    bomb.style.left = (this.bombX - 25) + 'px';
+    bomb.style.top = (this.bombY - 135) + 'px';
+
+    this.events.publish('updateScore', (this.currentRoom.difficulty.multiplier * 5));
   }
 
 }

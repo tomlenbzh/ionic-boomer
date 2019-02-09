@@ -1,39 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/Service/authentication.service';
+import { RoomService } from 'src/app/Service/room.service';
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  constructor() { }
+  rooms;
+  user: User;
 
-  rooms = [
-    {
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsgKWaWvMfgSmQjJBETlectexGQ4qM_Yf4eiP44iWKUqBASfGvUA',
-      difficulty: 'Easy',
-      description: 'Room n°1 - Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-    },
-    {
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYL8Bhl0za6lNIT2fmv34wjtVTPqz3_939uoYVfDxhtfCujE12oA',
-      difficulty: 'Medium',
-      description: 'Room n°2 - Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-    },
-    {
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgUm66xx14M60liBO9eEj4mxHuW0IZO6oIZullthAXU851bkdR',
-      difficulty: 'Hard',
-      description: 'Room n°3 - Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-    },
-    {
-      image: 'https://www.larousse.fr/encyclopedie/data/images/1314661-Pays_basque.jpg',
-      difficulty: 'Evil',
-      description: 'Room n°4 - Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+  constructor(
+    private authServ: AuthenticationService,
+    private roomServ: RoomService
+  ) { }
 
-    }
-  ];
+  ionViewWillEnter() {
+    this.authServ.getProfile(JSON.parse(localStorage.getItem('user')).pseudo)
+      .subscribe(
+        response => {
+          this.user = response.data;
+        }, error => {
 
-  ngOnInit() {
+        }
+      );
+
+    this.roomServ.getRooms()
+      .subscribe(
+        response => {
+          this.rooms = response.data;
+        }, error => {
+
+        }
+      );
   }
 
 }

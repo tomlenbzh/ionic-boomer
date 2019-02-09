@@ -18,7 +18,7 @@ export class RoomCardComponent implements OnInit {
   }
 
   navigateToRoom() {
-    this.roomService.current_room = this.room;
+    localStorage.setItem('room', JSON.stringify(this.room));
     this.router.navigateByUrl('room');
   }
 
