@@ -1,0 +1,24 @@
+<div class="rank-card">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-1>
+        <div class="rank-column">
+          {{ranking.rank}}
+        </div>
+      </ion-col>
+      <ion-col col-5>
+        <div class="rank-text">
+          {{ranking.score}}
+        </div>
+      </ion-col>
+      <ion-col col-3 routerLink="/scores">
+        <img [src]='ranking.image' alt="Image profile" class="rank-image">
+      </ion-col>
+      <ion-col col-3 routerLink="/scores">
+        <div class="rank-text">
+          {{ranking.pseudo}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

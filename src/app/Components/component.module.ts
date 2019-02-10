@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from '../Components/header/header.component';
 import { RoomCardComponent } from '../Components/room-card/room-card.component';
 import { FooterComponent } from '../Components/footer/footer.component';
+import { RankCardComponent } from '../Components/rank-card/rank-card.component';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,16 @@ import { FooterComponent } from '../Components/footer/footer.component';
     RegisterComponent,
     HeaderComponent,
     RoomCardComponent,
-    FooterComponent
+    FooterComponent,
+    RankCardComponent
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
     RoomCardComponent,
-    FooterComponent
+    FooterComponent,
+    RankCardComponent
   ],
   imports: [
     IonicModule,
