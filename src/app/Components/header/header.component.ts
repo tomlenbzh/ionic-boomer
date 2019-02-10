@@ -23,6 +23,6 @@ export class HeaderComponent {
   }
 
   updateScore(score) {
-    this.user.score = this.user.score + score;
+    this.user.score = score;
   }
 }

@@ -1,3 +1,4 @@
+import { Events } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Service/authentication.service';
 import { RoomService } from 'src/app/Service/room.service';
@@ -15,7 +16,8 @@ export class HomePage {
 
   constructor(
     private authServ: AuthenticationService,
-    private roomServ: RoomService
+    private roomServ: RoomService,
+    private events: Events,
   ) { }
 
   ionViewWillEnter() {
@@ -23,8 +25,8 @@ export class HomePage {
       .subscribe(
         response => {
           this.user = response.data;
-        }, error => {
-
+          localStorage.setItem('user', JSON.stringify(response.data));
+          this.events.publish('updateUser', response.data);
         }
       );
 
@@ -32,8 +34,6 @@ export class HomePage {
       .subscribe(
         response => {
           this.rooms = response.data;
-        }, error => {
-
         }
       );
   }

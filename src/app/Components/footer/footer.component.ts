@@ -1,3 +1,4 @@
+import { Events } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,21 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
-  constructor() { }
+  score: number;
+  players: number;
 
-  ngOnInit() {
+  constructor(private events: Events) {
+    events.subscribe('updateScoreFooter', (score: number) => this.updateScore(score));
+    events.subscribe('updatePlayer', (players: number) => this.updatePlayer(players));
   }
 
+  updateScore(score) {
+    this.score = score;
+  }
+
+  updatePlayer(players) {
+    this.players = players;
+  }
 }
