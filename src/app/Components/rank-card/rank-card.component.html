@@ -1,18 +1,20 @@
 <div class="rank-card">
   <ion-grid>
     <ion-row>
-      <ion-col col-1>
+      <ion-col col-3>
         <div class="rank-column">
           {{ranking.rank}}
         </div>
       </ion-col>
-      <ion-col col-5>
+      <ion-col col-3>
         <div class="rank-text">
           {{ranking.score}}
         </div>
       </ion-col>
       <ion-col col-3 routerLink="/scores">
-        <img [src]='ranking.image' alt="Image profile" class="rank-image">
+        <div class="rank-image-div">
+          <img src='https://www.w3schools.com/w3css/img_lights.jpg' alt="Image profile" class="rank-image">
+        </div>
       </ion-col>
       <ion-col col-3 routerLink="/scores">
         <div class="rank-text">

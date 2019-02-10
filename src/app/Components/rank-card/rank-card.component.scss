@@ -15,6 +15,7 @@
 .rank-column {
   width: 30px;
   height: 30px;
+  font-size: smaller;
   border: 1px solid #ed9019;
   border-radius: 50%;
   text-align: center;
@@ -26,6 +27,10 @@
   font-size: 15px;
   text-align: center;
   color: white
+}
+
+.rank-image-div {
+  text-align: left;
 }
 
 .rank-image {
