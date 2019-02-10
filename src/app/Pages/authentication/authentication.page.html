@@ -4,7 +4,7 @@
   <div *ngIf="showComponent" class="div-authentication">
     <app-login></app-login>
     <div class="auth-switch-button-div" *ngIf="!keyboard.isVisible">
-      <button class="auth-switch-button" (click)="switchComponent()">Not a member yet ?</button>
+      <button class="auth-switch-button animated flipInY" (click)="switchComponent()">Not a member yet ?</button>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
   <div *ngIf="!showComponent" class="div-authentication">
     <app-register></app-register>
     <div class="auth-switch-button-div" *ngIf="!keyboard.isVisible">
-      <button class="auth-switch-button" (click)="switchComponent()">Already got an account ?</button>
+      <button class="auth-switch-button animated flipInY" (click)="switchComponent()">Already got an account ?</button>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-<div class="auth-container">
+<div class="auth-container animated fadeIn">
   <!-- Form Content -->
   <h1 class="auth-title">Register</h1>
   <input class="auth-input" type="text" placeholder="Enter your login..." [(ngModel)]="login">
@@ -7,7 +7,7 @@
   <button class="auth-button" (click)="signUp()">Create my account</button>
 
   <!-- Sign Up Error -->
-  <div *ngIf="sign_up_error !== ''" class="auth-error">
+  <div *ngIf="sign_up_error !== ''" class="auth-error animated jackInTheBox">
     <p>{{sign_up_error}}</p>
   </div>
 </div>

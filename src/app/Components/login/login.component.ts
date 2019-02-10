@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    this.sign_in_error = '';
     if (this.login !== '' && this.password !== '') {
       const credentials = {
         'pseudo': this.login,
@@ -29,13 +30,13 @@ export class LoginComponent implements OnInit {
       this.authService.login(credentials)
         .subscribe(
           response => {
+            this.sign_in_error = '';
             const res: any = response;
             localStorage.setItem('token', res.token);
             localStorage.setItem('user', JSON.stringify(res._user));
             this.router.navigateByUrl('home');
             this.login = '';
             this.password = '';
-            this.sign_in_error = '';
           },
           error => {
             this.sign_in_error = error.error.message;
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
           }
         );
     } else {
+      this.sign_in_error = '';
       this.sign_in_error = 'Please fill all the fields to sign in to your account !';
     }
   }

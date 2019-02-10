@@ -1,12 +1,13 @@
 <div class="room-card">
   <img class="room-image" [src]="room.difficulty.background">
-  <div class="room-difficulty">
+  <div class="room-difficulty animated fadeIn">
     {{room.difficulty.title}}
   </div>
-  <div class="room-description">
+  <div class="room-description animated fadeIn">
     {{room.difficulty.description}}
   </div>
   <div class="room-footer">
-    <button class="room-join-button" (click)="navigateToRoom()" routerLink="/room">Join the room...</button>
+    <button class="room-join-button animated fadeIn" (click)="navigateToRoom()" routerLink="/room">Join the
+      room...</button>
   </div>
 </div>

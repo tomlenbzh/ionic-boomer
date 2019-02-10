@@ -5,11 +5,13 @@
   <div class="profile-content">
 
     <div class="profile-header">
-      <img [src]="profileImage" alt="" class="profile-image">
+      <img *ngIf="chosenImage === ''" [src]="defaultImage" alt="Profile image" class="profile-image">
+      <img *ngIf="chosenImage !== ''" [src]="chosenImage" alt="Profile image" class="profile-image">
       <div class="profile-info">
         <div class="profile-info-position">
           <h3 class="profile-pseudo">tomlenbzh</h3>
-          <ion-icon name="camera" class="profile-camera-button"></ion-icon>
+          <ion-icon name="camera" class="profile-camera-button" (click)="getPicture('camera')"></ion-icon>
+          <ion-icon name="images" class="profile-camera-button" (click)="getPicture('gallery')"></ion-icon>
           <!-- <button class="sign-out-button">Sign Out</button> -->
         </div>
       </div>

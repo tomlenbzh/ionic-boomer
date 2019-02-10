@@ -19,15 +19,15 @@
 <div class="sub-header">
   <ion-grid>
     <ion-row>
-      <ion-col col-4 class="sub-header-columns">
+      <ion-col col-4 class="sub-header-columns animated flipInY">
         <span class="sub-header-data" *ngIf="user">{{user.score}}</span>
         <ion-icon name="star"></ion-icon>
       </ion-col>
-      <ion-col col-4 class="sub-header-columns">
+      <ion-col col-4 class="sub-header-columns animated flipInY">
         <span class="sub-header-data" *ngIf="user">{{user.defeat}}</span>
         <ion-icon name="heart-dislike"></ion-icon>
       </ion-col>
-      <ion-col col-4 class="sub-header-columns" routerLink="/scores">
+      <ion-col col-4 class="sub-header-columns animated flipInY" routerLink="/scores">
         <ion-icon name="stats"></ion-icon>
       </ion-col>
     </ion-row>

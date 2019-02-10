@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profil',
@@ -7,11 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilPage implements OnInit {
 
-  profileImage = 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
+  defaultImage = 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
+  chosenImage = '';
 
-  constructor() { }
+  galleryOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: 0
+  };
 
-  ngOnInit() {
+  cameraOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: 1
+  };
+
+  constructor(public toastController: ToastController, private camera: Camera) { }
+
+  ngOnInit() { }
+
+  async presentToastWithOptions(message: string, duration: number, showCloseButton: boolean, position, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      showCloseButton: showCloseButton,
+      position: position,
+      color: color
+    });
+    toast.present();
   }
 
+  getPicture(type: string) {
+    if (type === 'camera') {
+      this.camera.getPicture(this.cameraOptions).then((imageData) => {
+        // const base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.chosenImage = imageData;
+        this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
+      }, (err) => {
+        this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+      });
+    } else if (type === 'gallery') {
+      this.camera.getPicture(this.galleryOptions).then((imageData) => {
+        // const base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.chosenImage = imageData;
+        this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
+      }, (err) => {
+        this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+      });
+    } else {
+      this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+    }
+  }
 }

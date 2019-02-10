@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   signUp() {
+    this.sign_up_error = '';
     if (this.login !== '' && this.password !== '' && this.password_confirm !== '') {
       if (this.password === this.password_confirm) {
         this.sign_up_error = '';
@@ -47,11 +48,11 @@ export class RegisterComponent implements OnInit {
         this.authService.register(credentials)
           .subscribe(
             response => {
+              this.sign_up_error = '';
               this.login = '';
               this.password = '';
               this.password_confirm = '';
               this.presentToastWithOptions();
-
             },
             error => {
               this.sign_up_error = error.error.message;
@@ -59,10 +60,12 @@ export class RegisterComponent implements OnInit {
             }
           );
       } else {
+        this.sign_up_error = '';
         this.sign_up_error = 'You must enter the same password !';
         console.log(this.sign_up_error);
       }
     } else {
+      this.sign_up_error = '';
       this.sign_up_error = 'Please fill all the fields to create your account !';
       console.log(this.sign_up_error);
     }
