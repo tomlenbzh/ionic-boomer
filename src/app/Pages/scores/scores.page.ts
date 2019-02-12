@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { RankingService } from '../../Service/ranking.service';
+import { NetworkService } from '../../Service/network.service';
 
 @Component({
   selector: 'app-scores',
@@ -10,7 +12,9 @@ export class ScoresPage implements OnInit {
 
   top_ranking: any;
 
-  constructor(private rankingService: RankingService) { }
+  constructor(private rankingService: RankingService, private networkService: NetworkService) {
+    this.networkService.checkNetworkQuality();
+  }
 
   ionViewWillEnter() {
     this.rankingService.getRanking()
@@ -18,7 +22,7 @@ export class ScoresPage implements OnInit {
         response => {
           this.top_ranking = response;
         }, error => {
-
+          console.log('Error : ', error);
         }
       );
   }

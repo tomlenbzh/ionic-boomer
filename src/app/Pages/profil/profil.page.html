@@ -20,6 +20,11 @@
     <div class="profile-options">
       <p>Check network's quality:</p>
       <p>Adjust brightness:</p>
+      <ion-range min="0" max="10" step="1" snaps="false" pin="true" color="primary" [(ngModel)]="brightness"
+        (ionChange)="changeBrightness()">
+        <ion-icon size="small" slot="start" name="moon"></ion-icon>
+        <ion-icon slot="end" name="sunny"></ion-icon>
+      </ion-range>
     </div>
   </div>
 

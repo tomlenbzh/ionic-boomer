@@ -1,7 +1,9 @@
 import { Events } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { AuthenticationService } from 'src/app/Service/authentication.service';
 import { RoomService } from 'src/app/Service/room.service';
+import { NetworkService } from '../../Service/network.service';
 import { User } from 'src/app/Models/user';
 
 @Component({
@@ -17,8 +19,11 @@ export class HomePage {
   constructor(
     private authServ: AuthenticationService,
     private roomServ: RoomService,
+    private networkService: NetworkService,
     private events: Events,
-  ) { }
+  ) {
+    this.networkService.checkNetworkQuality();
+  }
 
   ionViewWillEnter() {
     this.authServ.getProfile(JSON.parse(localStorage.getItem('user')).pseudo)

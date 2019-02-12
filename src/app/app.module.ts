@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { Brightness } from '@ionic-native/brightness/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ const config: SocketIoConfig = { url: 'https://www.alexandremartins.net', option
     HttpClient,
     Keyboard,
     Network,
-    Camera
+    Camera,
+    Brightness
   ],
   bootstrap: [AppComponent]
 })

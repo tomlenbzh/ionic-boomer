@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
+
+import { NetworkService } from '../../Service/network.service';
+import { BrightnessService } from '../../Service/brightness.service';
 
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.page.html',
   styleUrls: ['./profil.page.scss'],
 })
-export class ProfilPage implements OnInit {
+export class ProfilPage {
 
   defaultImage = 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
   chosenImage = '';
+  brightness = 7;
 
   galleryOptions: CameraOptions = {
     quality: 100,
@@ -28,9 +32,19 @@ export class ProfilPage implements OnInit {
     sourceType: 1
   };
 
-  constructor(public toastController: ToastController, private camera: Camera) { }
+  constructor(
+    public toastController: ToastController,
+    private camera: Camera,
+    private networkService: NetworkService,
+    private brightService: BrightnessService
+  ) {
+    this.networkService.checkNetworkQuality();
+  }
 
-  ngOnInit() { }
+  changeBrightness() {
+    const newBrightness = (this.brightness / 10);
+    this.brightService.changeBrightness(newBrightness);
+  }
 
   async presentToastWithOptions(message: string, duration: number, showCloseButton: boolean, position, color: string) {
     const toast = await this.toastController.create({

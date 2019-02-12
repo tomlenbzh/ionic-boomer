@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Socket } from 'ng-socket-io';
 
+import { NetworkService } from '../../Service/network.service';
+
 @Component({
   selector: 'app-room',
   templateUrl: './room.page.html',
@@ -14,7 +16,14 @@ export class RoomPage {
   bombX: number;
   bombY: number;
   currentScore: number;
-  constructor(private router: Router, private events: Events, private socket: Socket) { }
+  constructor(
+    private router: Router,
+    private events: Events,
+    private socket: Socket,
+    private networkService: NetworkService
+  ) {
+    this.networkService.checkNetworkQuality();
+  }
 
   ionViewWillEnter() {
     if (JSON.parse(localStorage.getItem('room'))) {
