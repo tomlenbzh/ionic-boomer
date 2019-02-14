@@ -10,23 +10,23 @@ export class RankCardComponent implements OnInit {
 
   @Input() ranking;
 
-  chosenImage = 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
+  emptyUserImage = 'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
 
   constructor(
     private fireService: FirebaseService
   ) { }
 
   ngOnInit() {
-    this.getProfile(this.ranking.pseudo);
+    this.getProfileImage(this.ranking.pseudo);
   }
 
-  getProfile(pseudo) {
+  getProfileImage(pseudo) {
     this.fireService.getImageProfil(pseudo).subscribe(
       res => {
-        this.chosenImage = res;
+        this.emptyUserImage = res;
       },
       () => {
-        this.chosenImage =
+        this.emptyUserImage =
           'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
       }
     );

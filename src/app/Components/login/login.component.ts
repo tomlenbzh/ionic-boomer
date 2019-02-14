@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   login: string;
   password: string;
   sign_in_error: string;
+
   constructor(private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
@@ -40,7 +41,6 @@ export class LoginComponent implements OnInit {
           },
           error => {
             this.sign_in_error = error.error.message;
-            console.log(error);
           }
         );
     } else {

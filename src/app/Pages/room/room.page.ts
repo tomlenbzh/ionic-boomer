@@ -2,6 +2,7 @@ import { Events } from '@ionic/angular';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Socket } from 'ng-socket-io';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 import { NetworkService } from '../../Service/network.service';
 
@@ -18,6 +19,7 @@ export class RoomPage {
   currentScore: number;
   constructor(
     private router: Router,
+    private vibration: Vibration,
     private events: Events,
     private socket: Socket,
     private networkService: NetworkService
@@ -48,6 +50,7 @@ export class RoomPage {
   }
 
   destroy = () => {
+    this.vibration.vibrate(1000);
     this.router.navigateByUrl('home');
   }
 
@@ -70,12 +73,10 @@ export class RoomPage {
   getCoordinates(event) {
     this.socket.emit('playerClick', {});
 
-    // This output's the X coord of the click
     this.bombX = event.clientX;
-    // This output's the Y coord of the click
     this.bombY = event.clientY;
-
     const bomb = document.getElementById('bombImage');
+
     bomb.style.position = 'absolute';
     bomb.style.left = (this.bombX - 25) + 'px';
     bomb.style.top = (this.bombY - 135) + 'px';

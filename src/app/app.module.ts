@@ -10,11 +10,14 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Brightness } from '@ionic-native/brightness/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 const config: SocketIoConfig = { url: 'https://www.alexandremartins.net', options: {} };
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
@@ -36,6 +39,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
     Network,
     Camera,
     Brightness,
+    Vibration,
     WebView
   ],
   bootstrap: [AppComponent]

@@ -21,8 +21,6 @@ export class ScoresPage implements OnInit {
       .subscribe(
         response => {
           this.top_ranking = response.data;
-        }, error => {
-          console.log('Error : ', error);
         }
       );
   }

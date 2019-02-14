@@ -10,7 +10,6 @@ import { User } from 'src/app/Models/user';
 
 export class HeaderComponent {
 
-  // @Input() user: User;
   user = JSON.parse(localStorage.getItem('user'));
 
   constructor(public events: Events) {

@@ -5,9 +5,8 @@ import { ToastController } from '@ionic/angular';
 
 import { NetworkService } from '../../Service/network.service';
 import { BrightnessService } from '../../Service/brightness.service';
+import { AuthenticationService } from '../../Service/authentication.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Component({
   selector: 'app-profil',
@@ -16,12 +15,14 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 })
 export class ProfilPage {
 
-  chosenImage;
+  getImageResult;
+  userPseudo = JSON.parse(localStorage.getItem('user')).pseudo;
+  userImage;
   brightness = 7;
 
   galleryOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: 0
@@ -29,7 +30,7 @@ export class ProfilPage {
 
   cameraOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: 1,
@@ -42,26 +43,29 @@ export class ProfilPage {
     private networkService: NetworkService,
     private brightService: BrightnessService,
     private storage: AngularFireStorage,
-    private webview: WebView,
-    private fireService: FirebaseService
+    private fireService: FirebaseService,
+    private authenticationService: AuthenticationService
   ) {
     this.networkService.checkNetworkQuality();
   }
 
   ionViewWillEnter() {
-    this.getProfile(JSON.parse(localStorage.getItem('user')).pseudo);
+    this.getProfileImage(JSON.parse(localStorage.getItem('user')).pseudo);
   }
 
-  getProfile(pseudo) {
-    this.fireService.getImageProfil(pseudo).subscribe(
-      res => {
-        this.chosenImage = res;
-      },
-      () => {
-        this.chosenImage =
+  signOut() {
+    this.authenticationService.logout();
+  }
+
+  getProfileImage(pseudo) {
+    this.fireService.getImageProfil(pseudo)
+      .subscribe(res => {
+      this.userImage = res;
+      }, () => {
+        this.userImage =
           'https://images.pexels.com/photos/132037/pexels-photo-132037.jpeg?cs=srgb&dl=beach-blur-boardwalk-132037.jpg&fm=jpg';
       }
-    );
+      );
   }
 
   changeBrightness() {
@@ -80,78 +84,25 @@ export class ProfilPage {
     toast.present();
   }
 
-  getPicture(type: string) {
+  async chooseImage(type: string) {
     if (type === 'camera') {
-      this.camera.getPicture(this.cameraOptions).then((imageData) => {
-        imageData = (<any>window).Ionic.WebView.convertFileSrc(imageData);
-        this.chosenImage = imageData;
-        document.getElementById('debug').innerHTML = 'Camera : ' + this.chosenImage;
-        this.uploadImageToFirebase(imageData);
+      this.getImageResult = await this.camera.getPicture(this.cameraOptions);
+      this.uploadImageToFirebase(this.getImageResult);
 
-        // this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
-      }, (err) => {
-        // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
-      });
     } else if (type === 'gallery') {
-      this.camera.getPicture(this.galleryOptions).then((imageData) => {
-        // imageData = this.webview.convertFileSrc(imageData);
-        imageData = (<any>window).Ionic.WebView.convertFileSrc(imageData);
-        this.chosenImage = imageData;
-        document.getElementById('debug').innerHTML = 'Gallery : \n';
-        this.uploadImageToFirebase(imageData);
-        // this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
-      }, (err) => {
-        // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
-      });
-    } else {
-      // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+      this.getImageResult = await this.camera.getPicture(this.galleryOptions);
+      this.uploadImageToFirebase(this.getImageResult);
     }
   }
 
-  uploadImageToFirebase(image) {
-    document.getElementById('debug').innerHTML += 'Upload to Firebase\n';
-    this.uploadImage(image).then(
-      photoURL => {
-        document.getElementById('debug').innerHTML += 'Success\n';
-        this.presentToastWithOptions('Image was updated successfully', 1000, true, 'top', 'success');
-      },
-      error => {
-        document.getElementById('debug').innerHTML += ' + Error\n';
-        this.presentToastWithOptions('Image wasn\'t updated successfully', 1000, true, 'top', 'light');
-      }
-    );
-  }
-
-  encodeImageUri(imageUri, callback) {
-    document.getElementById('debug').innerHTML += 'EncodeImageUri\n';
-    const c = document.createElement('canvas');
-    // const ctx = c.getContext('2d');
-    const img = new Image();
-    img.onload = function () {
-      const aux: any = this;
-      // c.width = aux.width;
-      // c.height = aux.height;
-      // ctx.drawImage(img, 0, 0);
-      const dataURL = c.toDataURL('image/jpeg');
-      callback(dataURL);
-    };
-    img.src = imageUri;
-  }
-
-  uploadImage(imageURI) {
-    document.getElementById('debug').innerHTML += 'Upload Image\n';
-    return new Promise<any>((resolve, reject) => {
-      const imageRef = this.storage.ref('').child('').child(JSON.parse(localStorage.getItem('user')).pseudo);
-      this.encodeImageUri(imageURI, function (image64) {
-        document.getElementById('debug').innerHTML += 'Encoding';
-        imageRef.putString(image64, 'data_url')
-          .then(snapshot => {
-            document.getElementById('debug').innerHTML += 'uploadImage';
-            resolve(snapshot.downloadURL);
-          }, err => {
-            reject(err);
-          });
-      });
+  uploadImageToFirebase(result) {
+    const image = `data:image/jpeg;base64,${result}`;
+    const imageRef = this.storage.ref('').child('').child(JSON.parse(localStorage.getItem('user')).pseudo);
+    imageRef.putString(image, 'data_url').then(() => {
+      this.getProfileImage(JSON.parse(localStorage.getItem('user')).pseudo);
+      this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
+    }, () => {
+      this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
     });
   }
 }

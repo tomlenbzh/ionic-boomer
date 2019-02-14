@@ -5,21 +5,19 @@
   <div class="profile-content">
 
     <div class="profile-header">
-      <img [src]="chosenImage" alt="Profile image" class="profile-image">
+      <div class="profile-image-div">
+        <img *ngIf="userImage !== ''" [src]="userImage" alt="Profile image" class="profile-image">
+      </div>
       <div class="profile-info">
         <div class="profile-info-position">
-          <h3 class="profile-pseudo">tomlenbzh</h3>
-          <ion-icon name="camera" class="profile-camera-button" (click)="getPicture('camera')"></ion-icon>
-          <ion-icon name="images" class="profile-camera-button" (click)="getPicture('gallery')"></ion-icon>
-          <!-- <button class="sign-out-button">Sign Out</button> -->
+          <h3 class="profile-pseudo">{{userPseudo}}</h3>
+          <ion-icon name="camera" class="profile-camera-button" (click)="chooseImage('camera')"></ion-icon>
+          <ion-icon name="images" class="profile-camera-button" (click)="chooseImage('gallery')"></ion-icon>
         </div>
       </div>
     </div>
 
-    <div id="debug"></div>
-
     <div class="profile-options">
-      <p>Check network's quality:</p>
       <p>Adjust brightness:</p>
       <ion-range min="0" max="10" step="1" snaps="false" pin="true" color="primary" [(ngModel)]="brightness"
         (ionChange)="changeBrightness()">
@@ -27,6 +25,8 @@
         <ion-icon slot="end" name="sunny"></ion-icon>
       </ion-range>
     </div>
+    <button class="sign-out-button" (click)="signOut()">Sign Out</button>
+
   </div>
 
 </ion-content>

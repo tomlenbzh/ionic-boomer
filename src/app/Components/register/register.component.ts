@@ -56,18 +56,15 @@ export class RegisterComponent implements OnInit {
             },
             error => {
               this.sign_up_error = error.error.message;
-              console.log(error);
             }
           );
       } else {
         this.sign_up_error = '';
         this.sign_up_error = 'You must enter the same password !';
-        console.log(this.sign_up_error);
       }
     } else {
       this.sign_up_error = '';
       this.sign_up_error = 'Please fill all the fields to create your account !';
-      console.log(this.sign_up_error);
     }
   }
 }
