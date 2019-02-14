@@ -32,7 +32,8 @@ export class ProfilPage {
     destinationType: this.camera.DestinationType.FILE_URI,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    sourceType: 1
+    sourceType: 1,
+    correctOrientation: true
   };
 
   constructor(
@@ -84,48 +85,53 @@ export class ProfilPage {
       this.camera.getPicture(this.cameraOptions).then((imageData) => {
         imageData = (<any>window).Ionic.WebView.convertFileSrc(imageData);
         this.chosenImage = imageData;
+        document.getElementById('debug').innerHTML = 'Camera : ' + this.chosenImage;
         this.uploadImageToFirebase(imageData);
 
-        this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
+        // this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
       }, (err) => {
-        this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+        // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
       });
     } else if (type === 'gallery') {
       this.camera.getPicture(this.galleryOptions).then((imageData) => {
-        imageData = this.webview.convertFileSrc(imageData);
+        // imageData = this.webview.convertFileSrc(imageData);
+        imageData = (<any>window).Ionic.WebView.convertFileSrc(imageData);
         this.chosenImage = imageData;
+        document.getElementById('debug').innerHTML = 'Gallery : \n';
         this.uploadImageToFirebase(imageData);
-        this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
+        // this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
       }, (err) => {
-        this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+        // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
       });
     } else {
-      this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
+      // this.presentToastWithOptions('Picture unchanged.', 1000, true, 'top', 'light');
     }
   }
 
-  
   uploadImageToFirebase(image) {
+    document.getElementById('debug').innerHTML += 'Upload to Firebase\n';
     this.uploadImage(image).then(
       photoURL => {
+        document.getElementById('debug').innerHTML += 'Success\n';
         this.presentToastWithOptions('Image was updated successfully', 1000, true, 'top', 'success');
       },
       error => {
+        document.getElementById('debug').innerHTML += ' + Error\n';
         this.presentToastWithOptions('Image wasn\'t updated successfully', 1000, true, 'top', 'light');
       }
     );
-
   }
 
   encodeImageUri(imageUri, callback) {
+    document.getElementById('debug').innerHTML += 'EncodeImageUri\n';
     const c = document.createElement('canvas');
-    const ctx = c.getContext('2d');
+    // const ctx = c.getContext('2d');
     const img = new Image();
     img.onload = function () {
       const aux: any = this;
-      c.width = aux.width;
-      c.height = aux.height;
-      ctx.drawImage(img, 0, 0);
+      // c.width = aux.width;
+      // c.height = aux.height;
+      // ctx.drawImage(img, 0, 0);
       const dataURL = c.toDataURL('image/jpeg');
       callback(dataURL);
     };
@@ -133,11 +139,14 @@ export class ProfilPage {
   }
 
   uploadImage(imageURI) {
+    document.getElementById('debug').innerHTML += 'Upload Image\n';
     return new Promise<any>((resolve, reject) => {
       const imageRef = this.storage.ref('').child('').child(JSON.parse(localStorage.getItem('user')).pseudo);
       this.encodeImageUri(imageURI, function (image64) {
+        document.getElementById('debug').innerHTML += 'Encoding';
         imageRef.putString(image64, 'data_url')
           .then(snapshot => {
+            document.getElementById('debug').innerHTML += 'uploadImage';
             resolve(snapshot.downloadURL);
           }, err => {
             reject(err);
