@@ -83,10 +83,7 @@ export class ProfilPage {
     if (type === 'camera') {
       this.camera.getPicture(this.cameraOptions).then((imageData) => {
         imageData = (<any>window).Ionic.WebView.convertFileSrc(imageData);
-        // imageData = this.webview.convertFileSrc(imageData);
         this.chosenImage = imageData;
-
-
         this.uploadImageToFirebase(imageData);
 
         this.presentToastWithOptions('Profile picture successfuly updated.', 1000, true, 'top', 'success');
@@ -108,14 +105,11 @@ export class ProfilPage {
   }
 
   uploadImageToFirebase(image) {
-    document.getElementById('debug').innerHTML += 'Upload Image to Firebase';
     this.uploadImage(image).then(
       photoURL => {
-        document.getElementById('debug').innerHTML = JSON.stringify(photoURL);
         this.presentToastWithOptions('Image was updated successfully', 1000, true, 'top', 'success');
       },
       error => {
-        document.getElementById('debug').innerHTML = JSON.stringify(error);
         this.presentToastWithOptions('Image wasn\'t updated successfully', 1000, true, 'top', 'light');
       }
     );
@@ -139,8 +133,7 @@ export class ProfilPage {
 
   uploadImage(imageURI) {
     return new Promise<any>((resolve, reject) => {
-      const storageRef = this.storage.ref('');
-      const imageRef = storageRef.child('').child(JSON.parse(localStorage.getItem('user')).pseudo);
+      const imageRef = this.storage.ref('').child('').child(JSON.parse(localStorage.getItem('user')).pseudo);
       this.encodeImageUri(imageURI, function (image64) {
         imageRef.putString(image64, 'data_url')
           .then(snapshot => {
