@@ -104,6 +104,7 @@ export class ProfilPage {
     }
   }
 
+  
   uploadImageToFirebase(image) {
     this.uploadImage(image).then(
       photoURL => {
