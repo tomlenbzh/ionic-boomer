@@ -15,11 +15,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 const config: SocketIoConfig = { url: 'https://www.alexandremartins.net', options: {} };
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SocketIoModule.forRoot(config)],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SocketIoModule.forRoot(config),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -28,7 +35,8 @@ const config: SocketIoConfig = { url: 'https://www.alexandremartins.net', option
     Keyboard,
     Network,
     Camera,
-    Brightness
+    Brightness,
+    WebView
   ],
   bootstrap: [AppComponent]
 })

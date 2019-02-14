@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://www.alexandremartins.net/'
+  apiUrl: 'https://www.alexandremartins.net/',
+  firebase: {
+    apiKey: 'AIzaSyAZAVR-roKX-Xkvj-23NNSJ5QkgF2vBwx4',
+    authDomain: 'react-native-ecdfc.firebaseapp.com',
+    databaseURL: 'https://react-native-ecdfc.firebaseio.com',
+    projectId: 'react-native-ecdfc',
+    storageBucket: 'react-native-ecdfc.appspot.com',
+    messagingSenderId: '400846912108'
+  }
 };
 
 /*

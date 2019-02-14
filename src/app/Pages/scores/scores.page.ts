@@ -20,7 +20,7 @@ export class ScoresPage implements OnInit {
     this.rankingService.getRanking()
       .subscribe(
         response => {
-          this.top_ranking = response;
+          this.top_ranking = response.data;
         }, error => {
           console.log('Error : ', error);
         }

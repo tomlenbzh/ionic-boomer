@@ -13,6 +13,6 @@ export class RankingService {
   constructor(private http: HttpClient) { }
 
   getRanking() {
-    return this.http.get(ApiUrl + 'top');
+    return this.http.get<Response>(ApiUrl + 'top');
   }
 }
