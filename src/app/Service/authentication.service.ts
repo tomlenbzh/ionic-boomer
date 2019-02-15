@@ -18,6 +18,7 @@ export class AuthenticationService {
   }
 
   logout() {
+    localStorage.clear();
     this.router.navigateByUrl('authentication');
   }
 
